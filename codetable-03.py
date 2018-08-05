@@ -12,6 +12,13 @@ class code_table:
                 self._construction[(n,k)] = ""
                 
     def add(self,C,designed_distance=None):
+        """
+        Method for adding a code to the database.
+
+        inputs:
+        C: code to add
+        designed_distance: a lower bound for the min distance of C. You have to add this argument to avoid computing it.
+        """
         #add code C to the database
         n = C.length()
         k = C.dimension()
@@ -25,6 +32,9 @@ class code_table:
                 
                 
     def update_lower_bound(self, N, K, d):
+        """
+        Update with a new lowerbound at [N,K]. This method also takes into account possible code shortenings, lengthenings and truncations.
+        """
         nn = N
         kk = K
         self.lower_bounds[(nn,kk)] = d
@@ -52,6 +62,9 @@ class code_table:
                 
     # PlotkinSum update (u|u + v)
     def plotkin_update(self,n):
+        """
+        Adds Plotkin sums ((u|u+v)) of all elements in row n to the table, if applicable.
+        """
         if 2*n > self.maxn:
             return -1
         for k1 in range(1,n+1):
@@ -69,6 +82,9 @@ class code_table:
                 
     # juxtaposition update
     def juxtapose_update(self,k):
+        """
+        Adds juxtapositions of all elements in colums k to the table, if applicable.
+        """
         maxn = self.maxn
         for n1 in range(k,maxn+1):
             for n2 in range(k,maxn+1):
